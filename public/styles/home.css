@@ -1,6 +1,23 @@
 body {
-    background: #f4c4f3;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #fc67fa, #f4c4f3);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #fc67fa, #f4c4f3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background-image: url("/images/home_page_background.jpg");
+    color: yellow;
+}
 
+.jumbotron {
+
+    background: none;
+    text-align: center;
+    padding-bottom: 0%;
+    margin-bottom: 0%;
+
+}
+
+
+.container {
+    text-align: center;
+}
+
+hr {
+    
+    border: 5px solid yellow;
 }
