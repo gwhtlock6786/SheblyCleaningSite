@@ -1,47 +1,53 @@
 // required dependencies
-var express = require("express");
-var app = express();
-var bodyParser = require("body-parser");
+const express    = require("express"),
+      app        = express(),
+      bodyParser = require("body-parser"),
+      mongoose   = require("mongoose"),
+      Product    = require("./models/products");
+
+
+ //route dependencies
+ const productRoutes = require("./routes/products");     
 
 //app set up
 app.set("view engine", "ejs");
-app.use(express.static("public"));
+app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({extended: true}));
 
-//varables
-var products = [
-    { id: "0", title: "All Purpose Cleaner", image: "/images/jeshoots-com-__ZMnefoI3k-unsplash.jpg", details: " Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo praesentium veritatis consequatur natus, blanditiis deserunt, doloremque voluptatibus ullam, porro amet commodi? Eveniet tenetur veritatis pariatur repellat provident beatae est aspernatur."},
-    { id: "1", title: "Glass Cleaner", image: "/images/glassCleaner.jpg", details: " Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo praesentium veritatis consequatur natus, blanditiis deserunt, doloremque voluptatibus ullam, porro amet commodi? Eveniet tenetur veritatis pariatur repellat provident beatae est aspernatur."},
-    { id: "2", title: "Laundy Soap", image: "/images/laundry.jpg", details: " Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo praesentium veritatis consequatur natus, blanditiis deserunt, doloremque voluptatibus ullam, porro amet commodi? Eveniet tenetur veritatis pariatur repellat provident beatae est aspernatur."},
-    { id: "3", title: "Hand Soap", image: "/images/handSoap.jpg", details: " Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo praesentium veritatis consequatur natus, blanditiis deserunt, doloremque voluptatibus ullam, porro amet commodi? Eveniet tenetur veritatis pariatur repellat provident beatae est aspernatur."},
-    { id: "4", title: "Shampoo", image: "/images/shampoo.jpg", details: " Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo praesentium veritatis consequatur natus, blanditiis deserunt, doloremque voluptatibus ullam, porro amet commodi? Eveniet tenetur veritatis pariatur repellat provident beatae est aspernatur."},
-    { id: "5", title: "Conditioner", image: "/images/conditioner.jpg", details: " Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo praesentium veritatis consequatur natus, blanditiis deserunt, doloremque voluptatibus ullam, porro amet commodi? Eveniet tenetur veritatis pariatur repellat provident beatae est aspernatur."},
-    { id: "6", title: "Lotion", image: "/images/lotion.jpg", details: " Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo praesentium veritatis consequatur natus, blanditiis deserunt, doloremque voluptatibus ullam, porro amet commodi? Eveniet tenetur veritatis pariatur repellat provident beatae est aspernatur."},
-]
 
-//routes
+
+//* connecting to the database
+var url = process.env.DATABASEURL || "mongodb://localhost:27017/Shelbys_Emporium";
+
+mongoose.connect(url, {
+
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+.then(() => console.log('Connected to DB for Shelbys Emporium!!!'))
+.catch(error => console.log(error));
+
+
+
+//===================================
+// Route calls
+//===================================
+app.use(productRoutes);
+
+//*routes
 app.get("/", function(request, response){
     response.render("home");
 })
 
-app.get("/products", function(require, response){
-    response.render("products", {products: products});
-})
 
-app.get("/singleProduct", function(request, response){
-    var id = request.query.id;
-    console.log("id = "+id)
-    var product = products[id];
-    console.log(product)
-    response.render("singleProduct", {product: product});
-})
 
 app.get("/about", function(request, response){
     response.render("about");
 })
 
 
+var port = process.env.PORT || 3000;
 
-app.listen(3000, function(){
+app.listen(port, function(){
     console.log("Shelbys site running on port 3000");
 })
