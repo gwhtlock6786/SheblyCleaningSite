@@ -3,6 +3,7 @@ const express    = require("express"),
       app        = express(),
       bodyParser = require("body-parser"),
       mongoose   = require("mongoose"),
+      seedDB     = require("./seeds"),
       Product    = require("./models/products");
 
 
@@ -27,12 +28,12 @@ mongoose.connect(url, {
 .then(() => console.log('Connected to DB for Shelbys Emporium!!!'))
 .catch(error => console.log(error));
 
-
+seedDB();
 
 //===================================
 // Route calls
 //===================================
-app.use(productRoutes);
+app.use("/products",productRoutes);
 
 //*routes
 app.get("/", function(request, response){
