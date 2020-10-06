@@ -17,6 +17,25 @@ const express   = require("express"),
         
        
     });
+
+    //*Create route for new product
+    router.post("/", function(request, response){
+
+        Product.create(request.body.product, function(error, newProduct){
+            if(error){
+                console.log("Error =", error);
+            } else {
+                console.log(newProduct);
+                response.redirect("/products");
+            }
+        })
+
+    });
+
+    //*New Route
+    router.get("/new", function(request, response){
+        response.render("products/new");
+    });
     
     //*SHOW route
     router.get("/:id", function(request, response){
@@ -30,6 +49,9 @@ const express   = require("express"),
         })
         
     });
+
+
+    
 
 
 

@@ -1,0 +1,38 @@
+<%- include("../partials/header") %>
+
+<div class="container">
+    <div class="row text-center">
+        
+
+        <div id="newform">
+            <h1>Enter New Product</h1>
+           
+
+            <form action="/products" method="POST">
+
+                <div class="form-group">
+                    <label for="titleForm">Enter Name of New Product</label>
+                    <input class="form-control" type="text" name="product[title]" id="titleForm" placeholder="name">
+                </div>
+                <div class="form-group">
+                    <label for="priceForm">Enter Price of New Product</label>
+                    <input class="form-control" type="number" name="product[price]" id="priceForm" placeholder="price" min="0.01" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label for="imageForm">Enter Image url of New Product</label>
+                    <input  class="form-control" type="text" name="product[image]" id="imageForm" placeholder="image url">
+                </div>
+                <div class="form-group">
+                    <label for="descriptForm">Enter Description of New Campground</label>
+                    <input  class="form-control" type="text" name="product[description]" id="descriptForm" placeholder="describe me!!">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-lg btn-block btn-warning">Submit!</button>
+                </div>
+            </form>
+            <a href="/products">Go Back!</a>
+        </div>
+    </div>
+</div>
+
+<%- include("../partials/footer") %>

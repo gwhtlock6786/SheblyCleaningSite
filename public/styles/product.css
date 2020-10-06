@@ -15,7 +15,8 @@ body {
 }
 
 .card {
-    background-color: rgba(255,205,145,10);
+    /* background-color: rgba(255,205,145,10); */
+    background-color: clear;
 
 }
    
@@ -29,9 +30,16 @@ body {
 
 .container {
     text-align: center;
+    margin: auto;
 }
 
 hr {
     
     border: 5px solid yellow;
+}
+
+#newform {
+    width: 30%;
+    margin: 25px auto;
+    padding-top: 4rem;
 }
