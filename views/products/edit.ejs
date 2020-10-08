@@ -1,0 +1,34 @@
+<%- include("../partials/header") %>
+
+<div class="container myform">
+    <div class="row text-center">
+        <h1>Edit <%= product.title %></h1>
+        <div id="form">
+
+             <form action="/products/<%= product._id %>?_method=PUT" method="POST">
+                <div class="form-group">
+                    <label for="titleForm">Enter Title of new Product</label>
+                    <input class="form-control" type="text" name="product[title]" id="titleForm" value = "<%= product.title %>">
+                </div>
+                <div class="form-group">
+                    <label for="priceForm">Enter Price of New Product</label>
+                    <input class="form-control" type="number" name="product[price]" id="priceForm" value="<%= product.price %>" min="0.01" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label for="imageForm">Enter Image url of New Product</label>
+                    <input  class="form-control" type="text" name="product[image]" id="imageForm" value = "<%= product.image %>">
+                </div>
+                <div class="form-group">
+                    <label for="descriptForm">Enter Description of New Product</label>
+                    <input  class="form-control" type="text" name="product[description]" id="descriptForm" value = "<%= product.description %>">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-lg btn-block btn-warning">Submit!</button>
+                </div>
+            </form>
+            <a href="/products">Go Back!</a>
+        </div>
+    </div>
+</div>
+
+<%- include("../partials/footer") %>

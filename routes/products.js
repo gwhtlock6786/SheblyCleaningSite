@@ -50,6 +50,48 @@ const express   = require("express"),
         
     });
 
+    //*Edit route
+    router.get("/:id/edit", function(request, response){
+
+        Product.findById(request.params.id, function(error, foundProduct){
+
+            if(error){
+                console.log("Error = ",error);
+            } else {
+                response.render("products/edit", {product: foundProduct});
+            }
+        });
+    });
+
+
+    //*Update Route
+    router.put("/:id", function(request, response){
+
+        Product.findByIdAndUpdate(request.params.id, request.body.product, function(error, updatedProduct){
+            if(error){
+                console.log("Error = ",error);
+            } else {
+                response.redirect("/products/"+ updatedProduct._id);
+            }
+            
+        });
+    });
+
+
+    //*Destory route
+    router.delete("/:id", function(request, response){
+
+        Product.findByIdAndRemove(request.params.id, function(error){
+            if(error){
+                console.log("Error = ",error);
+            } else {
+
+                response.redirect("/products");
+            }
+        });
+        
+    });
+
 
     
 

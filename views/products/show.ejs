@@ -17,6 +17,10 @@
             <p><%= product.price %>/Bottle</p>
 
             <a href="#" class="btn btn-primary">Add to Order</a>
+            <a href="/products/<%= product._id %>/edit" class="btn btn-warning">Edit</a>
+            <form class="delete-form" action="/products/<%= product._id %>?_method=DELETE" method="POST">
+                <button class="btn btn-danger">Delete</button>
+            </form>
         </div>
 
 </div>

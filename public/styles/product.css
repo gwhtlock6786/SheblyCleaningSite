@@ -38,8 +38,12 @@ hr {
     border: 5px solid yellow;
 }
 
-#newform {
+.myform {
     width: 30%;
     margin: 25px auto;
     padding-top: 4rem;
+}
+
+.delete-form{
+    display: inline;
 }
