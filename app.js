@@ -4,12 +4,16 @@ const express        = require("express"),
       bodyParser     = require("body-parser"),
       mongoose       = require("mongoose"),
       seedDB         = require("./seeds"),
-      methodOverride = require("method-override");
+      methodOverride = require("method-override"),
+      User           = require("./models/user"),
+      passport       = require("passport"),
+      LocalStrategy  = require("passport-local"),
       Product        = require("./models/products");
 
 
  //route dependencies
- const productRoutes = require("./routes/products");     
+ const productRoutes = require("./routes/products"),
+       authRoutes    = require("./routes/index");     
 
 //app set up
 app.set("view engine", "ejs");
@@ -32,21 +36,29 @@ mongoose.connect(url, {
 
 seedDB();
 
+//*Passport config
+app.use(require("express-session")({
+    secret: "This is the Way!",
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+app.use(function(request, response, next){
+    response.locals.currentUser = request.user;
+    next();
+})
+
 //===================================
 // Route calls
 //===================================
 app.use("/products",productRoutes);
+app.use("/", authRoutes);
 
-//*routes
-app.get("/", function(request, response){
-    response.render("home");
-})
-
-
-
-app.get("/about", function(request, response){
-    response.render("about");
-})
 
 
 var port = process.env.PORT || 3000;
