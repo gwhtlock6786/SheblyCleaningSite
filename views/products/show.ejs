@@ -12,7 +12,7 @@
         <hr/>
 
         <div class="container">
-            <img src="<%= product.image %>" alt="" width="500", height="500">
+            <img class="img-responsive" src="<%= product.image %>" alt="" width="500", height="500">
             <p><%= product.description %></p>
             <p><%= product.price %>/Bottle</p>
 
@@ -23,6 +23,76 @@
             </form>
         </div>
 
+
+        <div class="container">
+            <div class="jumbotron">
+                <h1>Reviews</h1>
+                <a href="/products/<%= product._id %>/reviews/new" class="btn btn-primary">Add Reveiw</a>
+            </div>
+        </div>
+
+        <hr/>
+
+        <div class="container">
+            <% product.reviews.forEach(function(review){ %>
+
+                <div> 
+                    <p><Strong><%= review.contributor.username %></Strong></p>
+                    <p><%= review.content %></p>
+                    <% if(currentUser && review.contributor.id.equals(currentUser._id)){ %>
+                        <a href="/products/<%= product._id %>/reviews/<%= review._id %>/edit"
+                        class="btn btn-xs btn-warning">
+                        Edit
+                        </a>
+                        <form class ="delete-form" action="/products/<%= product._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
+                            <button class="btn btn-xs btn-danger">Delete</button>
+                        </form>
+                    <% } %>
+                </div>
+
+
+            <% }); %>
+
+        </div>
+
+
+
 </div>
+
+
+
+
+<!-- <div class="container">
+        
+        <div class="container">
+            <div class="jumbotron">
+                <h1>Shelbys Cleaning Emporium</h1>
+                <h3><%= product.title %></h3>
+            </div>
+        </div>
+
+        <hr/>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class=card>
+                        <img class="img-responsive card-img-top" src="<%= product.image %>" alt="" width="500", height="500">
+                        <div class="card-body">
+                            <p class="card-text"><%= product.description %></p>
+                            <p class="card-text text-right"><%= product.price %>/Bottle</p>
+
+                            <a href="#" class="btn btn-primary">Add to Order</a>
+                            <a href="/products/<%= product._id %>/edit" class="btn btn-warning">Edit</a>
+                            <form class="delete-form" action="/products/<%= product._id %>?_method=DELETE" method="POST">
+                                <button class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                 </div>
+            </div>
+        </div>
+
+</div> -->
 
 <%- include("../partials/footer") %>

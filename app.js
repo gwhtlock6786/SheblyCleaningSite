@@ -13,7 +13,8 @@ const express        = require("express"),
 
  //route dependencies
  const productRoutes = require("./routes/products"),
-       authRoutes    = require("./routes/index");     
+       authRoutes    = require("./routes/index"),
+       reviewRoutes  = require("./routes/reviews");     
 
 //app set up
 app.set("view engine", "ejs");
@@ -34,7 +35,7 @@ mongoose.connect(url, {
 .then(() => console.log('Connected to DB for Shelbys Emporium!!!'))
 .catch(error => console.log(error));
 
-seedDB();
+// seedDB();
 
 //*Passport config
 app.use(require("express-session")({
@@ -56,8 +57,10 @@ app.use(function(request, response, next){
 //===================================
 // Route calls
 //===================================
-app.use("/products",productRoutes);
+
 app.use("/", authRoutes);
+app.use("/products",productRoutes);
+app.use("/products/:id/reviews",reviewRoutes);
 
 
 

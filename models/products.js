@@ -1,13 +1,29 @@
 const mongoose = require("mongoose");
 
+const Review = require("../models/reviews");
 
 let productSchema = new mongoose.Schema({
     title: String,
     price: String,
     image: String,
-    description: String
+    description: String,
+
+    reviews: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Review"
+        }
+    ]
+    
+
 });
 
-//*TODO - add reviews to schema - model after comments
+productSchema.pre('remove', async function(){
+    await Review.remove({
+        _id: {
+            $in: this.reviews
+        }
+    });
+});
 
 module.exports = mongoose.model("Product", productSchema);

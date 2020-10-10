@@ -1,5 +1,6 @@
 const mongoose = require("mongoose"),
-      Products = require("./models/products");
+      Products = require("./models/products"),
+      Reviews  = require("./models/reviews");
       
     
       var products = [
@@ -25,6 +26,20 @@ const mongoose = require("mongoose"),
                             console.log("Error = "+error);
                         } else {
                             console.log("added Product: "+createdProduct);
+                            // Reviews.create(
+                            //     {
+                            //         content: "This is a really great product!! I enjoy it very much!! I cant even find quality this good in all of Wakanda",
+                            //         author: "King T'Challa"
+                            //     }, function(error, createdReview){
+                            //             if(error){
+                            //                 console.log("Error =",error);
+                            //             } else {
+                            //                 createdProduct.reviews.push(createdReview);
+                            //                 createdProduct.save();
+                            //                 console.log('Created reveiw');
+                            //             }
+                            //     });
+
                         }
                     });
                 });
