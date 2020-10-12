@@ -49,3 +49,11 @@ hr {
 .delete-form{
     display: inline;
 }
+
+.bg-transparent {
+transition: background-color 0.5s;
+}
+
+.bg-dark {
+transition: background-color 0.5s;
+}
