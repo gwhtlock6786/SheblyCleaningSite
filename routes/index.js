@@ -2,6 +2,7 @@ const express = require("express"),
       router  = express.Router(),
       passport = require("passport");
 
+const user = require("../models/user");
 const User = require("../models/user");
 
 
@@ -32,11 +33,12 @@ router.post("/register", function(request, response){
 
     User.register(newUser,request.body.password, function(error, createdUser){
         if(error){
-            console.log("Error = ",error);
+            request.flash("error",error.message);
             return response.redirect("/register");
         }
         
         passport.authenticate("local")(request, response, function(){
+            request.flash("success", "Welcome to Shelby's Cleaning Emporium "+user.username);
             response.redirect("/products");
         });
     });
@@ -59,7 +61,7 @@ router.post("/login", passport.authenticate("local", {
 //*Logout
 router.get("/logout", function(request, response){
     request.logout();
-
+    request.flash("success", "Logged you out");
     response.redirect("/products");
 });
 

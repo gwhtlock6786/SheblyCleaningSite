@@ -1,12 +1,13 @@
 const express      = require("express"),
-      router       = express.Router({mergeParams:true});
+      router       = express.Router({mergeParams:true}),
+      middleware   = require("../middleware");
 
 //Model configuration
 const Product = require("../models/products");
 const Review = require("../models/reviews");
 
 //*New route
-router.get("/new", function(request, response){
+router.get("/new", middleware.isLoggedIn, function(request, response){
    
     Product.findById(request.params.id, function(error, foundProduct){
 
@@ -20,7 +21,7 @@ router.get("/new", function(request, response){
 });
 
 //*Create route
-router.post("/", function(request, response){
+router.post("/", middleware.isLoggedIn, function(request, response){
 
     Product.findById(request.params.id, function(error, foundProduct){
         if(error){
@@ -50,7 +51,7 @@ router.post("/", function(request, response){
 
 
 //*Edit
-router.get("/:review_id/edit", function(request, response){
+router.get("/:review_id/edit", middleware.checkReviewOwnership, function(request, response){
     Review.findById(request.params.review_id, function(error, foundReview){
         if(error){
             console.log("Error = ", error);
@@ -63,7 +64,7 @@ router.get("/:review_id/edit", function(request, response){
 
 
 //*Update route
-router.put("/:review_id", function(request,response){
+router.put("/:review_id", middleware.checkReviewOwnership, function(request,response){
 
     Review.findByIdAndUpdate(request.params.review_id, request.body.review, function(error, updatedReview){
         if(error){
@@ -77,7 +78,7 @@ router.put("/:review_id", function(request,response){
 
 
 //*Destroy route
-router.delete("/:review_id", function(request, response){
+router.delete("/:review_id", middleware.checkReviewOwnership, function(request, response){
 
     Review.findByIdAndDelete(request.params.review_id, function(error){
         if(error){

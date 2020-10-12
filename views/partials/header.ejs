@@ -78,4 +78,20 @@
         </div>
     </nav>
 
+    <div class="container">
+        <% if(error && error.length > 0) { %>
+<!-- TODO correct formating of flash messsages  -->
+            <div class="alert alert-danger myform">
+                <h1><%= error %></h1>
+
+            </div>
+        <% } %>
+        
+        <% if(success && success.length > 0) { %>
+            <div class="alert alert-success myform">
+                <h1><%= success %></h1>
+
+            </div>
+        <% } %>
+    </div>
 

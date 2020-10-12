@@ -8,7 +8,8 @@ const express        = require("express"),
       User           = require("./models/user"),
       passport       = require("passport"),
       LocalStrategy  = require("passport-local"),
-      Product        = require("./models/products");
+      Product        = require("./models/products"),
+      flash          = require("connect-flash");
 
 
  //route dependencies
@@ -21,6 +22,7 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
+app.use(flash());
 
 
 
@@ -51,6 +53,8 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use(function(request, response, next){
     response.locals.currentUser = request.user;
+    response.locals.error = request.flash("error");
+    response.locals.success = request.flash("success");
     next();
 })
 

@@ -1,6 +1,7 @@
 const express   = require("express"),
       router    = express.Router(),
-      Product   = require("../models/products");
+      Product   = require("../models/products"),
+      middleware = require("../middleware");
 
 
 
@@ -19,7 +20,7 @@ const express   = require("express"),
     });
 
     //*Create route for new product
-    router.post("/", function(request, response){
+    router.post("/", middleware.isLoggedIn, function(request, response){
 
         Product.create(request.body.product, function(error, newProduct){
             if(error){
@@ -33,7 +34,7 @@ const express   = require("express"),
     });
 
     //*New Route
-    router.get("/new", function(request, response){
+    router.get("/new", middleware.isLoggedIn, function(request, response){
         response.render("products/new");
     });
     
