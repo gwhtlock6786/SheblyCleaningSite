@@ -13,9 +13,10 @@ const express        = require("express"),
 
 
  //route dependencies
- const productRoutes = require("./routes/products"),
-       authRoutes    = require("./routes/index"),
-       reviewRoutes  = require("./routes/reviews");     
+ const productRoutes       = require("./routes/products"),
+       authRoutes          = require("./routes/index"),
+       reviewRoutes        = require("./routes/reviews"),
+       productOptionRoutes = require("./routes/options");     
 
 //app set up
 app.set("view engine", "ejs");
@@ -65,6 +66,8 @@ app.use(function(request, response, next){
 app.use("/", authRoutes);
 app.use("/products",productRoutes);
 app.use("/products/:id/reviews",reviewRoutes);
+app.use("/products/:id/options",productOptionRoutes);
+
 
 
 

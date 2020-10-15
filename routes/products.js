@@ -41,7 +41,7 @@ const express   = require("express"),
     //*SHOW route
     router.get("/:id", function(request, response){
      
-        Product.findById(request.params.id).populate("reviews").exec(function(error, foundProduct){
+        Product.findById(request.params.id).populate("reviews").populate("options").exec(function(error, foundProduct){
             if(error){
                 console.log("Error ="+error);
             } else {
