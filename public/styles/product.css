@@ -1,8 +1,9 @@
 body {
-    background: #f4c4f3;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #fc67fa, #f4c4f3);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #fc67fa, #f4c4f3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+     /*background: #f4c4f3;  /*fallback for old browsers */
+     /*background: -webkit-linear-gradient(to right, #fc67fa, #f4c4f3);  /*Chrome 10-25, Safari 5.1-6 */
+     /*background: linear-gradient(to right, #fc67fa, #f4c4f3); /*W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    /* background-color: #F5F4F0; */
+    background-color: #EAE7DC;
     font-family: 'Paprika', cursive;
 
 }
@@ -36,8 +37,22 @@ body {
 }
 
 hr {
-    
-    border: 5px solid yellow;
+    overflow: visible; /* For IE */
+    height: 30px;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px 0 0 0;
+    border-radius: 20px;
+}
+hr:before { /* Not really supposed to work, but does */
+    display: block;
+    content: "";
+    height: 30px;
+    margin-top: -31px;
+    border-style: solid;
+    border-color: black;
+    border-width: 0 0 1px 0;
+    border-radius: 20px;
 }
 
 .myform {
@@ -50,10 +65,27 @@ hr {
     display: inline;
 }
 
-.bg-transparent {
-transition: background-color 0.5s;
+.bg-pink {
+    transition: background-color 0.5s;
+    background-color:  #E85A4F;
+    box-shadow: 0 2px 4px -1px rgba(0,0,0,0.25);
+
 }
 
 .bg-dark {
-transition: background-color 0.5s;
+    transition: background-color 0.5s;
+    box-shadow: 0 2px 4px -1px rgba(0,0,0,0.25);
+}
+
+
+#itemList {
+    background-color: #E98074;
+}
+
+.btn-grey {
+    background-color: #D8C3A5;
+}
+
+.bg-red {
+    background-color: #E85A4F;
 }
